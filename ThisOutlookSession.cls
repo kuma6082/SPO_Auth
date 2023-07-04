@@ -8,7 +8,7 @@ End Sub
 
 Private Sub SPO_Auth_Mail(ByVal objItem As MailItem)
 'CodeFolderはSPO_Authと同じフォルダ
-Const CodeFolder = "*************"
+Const CodeFolder = "**************" & "\"
 mailad1 = "no-reply@notify.microsoft.com"
 mailad2 = "no-reply@sharepointonline.com"
 
