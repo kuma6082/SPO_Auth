@@ -2,36 +2,36 @@ Attribute VB_Name = "SPO_Auth"
 Sub SPO_Auth()
     Dim Driver As New Selenium.WebDriver
     
-    Dim SPO_Identifier 'ƒuƒ‰ƒEƒU¯•Êq
+    Dim SPO_Identifier 'ãƒ–ãƒ©ã‚¦ã‚¶è­˜åˆ¥å­
     Dim sourceFolderPath
     Dim SPO_URL
     Dim MailAdress
     Dim CodeFolder
-    Dim AuthVerifiCode 'ƒpƒXƒR[ƒh
-    Dim AuthIdentifier 'ƒ[ƒ‹¯•Êq
+    Dim AuthVerifiCode 'ãƒ‘ã‚¹ã‚³ãƒ¼ãƒ‰
+    Dim AuthIdentifier 'ãƒ¡ãƒ¼ãƒ«è­˜åˆ¥å­
     Dim i As Integer
 
-'ƒ_ƒEƒ“ƒ[ƒhêŠ
+'ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å ´æ‰€
     sourceFolderPath = "**************" & "\"
-'SharePoint‚ÌURL
+'SharePointã®URL
     SPO_URL = "**************"
-'Outlook‚É“Í‚­ƒ[ƒ‹ƒAƒhƒŒƒX
+'Outlookã«å±Šããƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹
     MailAdress = "**************"
-'ƒR[ƒh‚ğ•Û‘¶‚·‚éƒtƒHƒ‹ƒ_
+'ã‚³ãƒ¼ãƒ‰ã‚’ä¿å­˜ã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ â€»CodeFolderã¯SPO_Auth_Mailã¨åŒã˜ãƒ•ã‚©ãƒ«ãƒ€
     CodeFolder = "**************" & "\"
     
-'ƒuƒ‰ƒEƒU‘€ì//
-    'headless‚É‚·‚é‚Æ•sˆÀ’è‚É‚È‚é‚Ì‚ÅƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ä‚¢‚Ü‚·B
+'ãƒ–ãƒ©ã‚¦ã‚¶æ“ä½œ//
+    'headlessã«ã™ã‚‹ã¨ä¸å®‰å®šã«ãªã‚‹ã®ã§ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã—ã¦ã„ã¾ã™ã€‚
     'Driver.AddArgument "headless"
     Driver.SetPreference "download.default_directory", sourceFolderPath
     Driver.Start "chrome"
     Driver.Window.SetSize 1300, 800
     Driver.Get SPO_URL
     
-'ƒƒOƒCƒ“ˆ—‚±‚±‚©‚ç
-    'ƒ[ƒ‹ƒAƒhƒŒƒX‹L“ü
+'ãƒ­ã‚°ã‚¤ãƒ³å‡¦ç†ã“ã“ã‹ã‚‰
+    'ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹è¨˜å…¥
     Driver.FindElementByXPath("//*[@id=""txtTOAAEmail""]").SendKeys MailAdress
-    'ƒ{ƒ^ƒ“ƒNƒŠƒbƒN
+    'ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯
     Driver.FindElementByXPath("//*[@id=""btnSubmitEmail""]").Click
 
     Do
@@ -41,7 +41,7 @@ Sub SPO_Auth()
             Driver.FindElementByXPath("//*[@id=""lnkSendCode""]").Click
         End If
         
-        Driver.FindElementByXPath("//*[@id=""txtTOAACode""]").SendKeys "1111111" '¯•Êqo‚·‚½‚ß‚Ìƒ_ƒ~[
+        Driver.FindElementByXPath("//*[@id=""txtTOAACode""]").SendKeys "1111111" 'è­˜åˆ¥å­å‡ºã™ãŸã‚ã®ãƒ€ãƒŸãƒ¼
         Driver.FindElementByXPath("//*[@id=""btnSubmitCode""]").Click
         SPO_Identifier = Driver.FindElementByXPath("//*[@id=""ValidateTOAACodeText""]/b").Attribute("innerHTML")
         Call SPO_AuthCode(CodeFolder, AuthVerifiCode, AuthIdentifier)
@@ -51,16 +51,16 @@ Sub SPO_Auth()
     Driver.FindElementByXPath("//*[@id=""txtTOAACode""]").Clear
     Driver.FindElementByXPath("//*[@id=""txtTOAACode""]").SendKeys AuthVerifiCode
     Driver.FindElementByXPath("//*[@id=""btnSubmitCode""]").Click
-'ƒƒOƒCƒ“ˆ—‚±‚±‚Ü‚Å
+'ãƒ­ã‚°ã‚¤ãƒ³å‡¦ç†ã“ã“ã¾ã§
     
-'‚±‚±‚©‚çŠó–]‚Ìˆ—
+'ã“ã“ã‹ã‚‰å¸Œæœ›ã®å‡¦ç†
     Call Sample(Driver)
-'Šó–]‚Ìˆ—‚±‚±‚Ü‚Å
+'å¸Œæœ›ã®å‡¦ç†ã“ã“ã¾ã§
     
     Driver.Close
     
 End Sub
-'ƒƒ“ƒ^ƒCƒ€ƒR[ƒh‚Æ¯•Êq‚ğ’Šo
+'ãƒ¯ãƒ³ã‚¿ã‚¤ãƒ ã‚³ãƒ¼ãƒ‰ã¨è­˜åˆ¥å­ã‚’æŠ½å‡º
 Sub SPO_AuthCode(ByRef CodeFolder, ByRef AuthVerifiCode, ByRef AuthIdentifier)
     Dim startTime As Double
     Dim endTime As Double
@@ -69,13 +69,13 @@ Sub SPO_AuthCode(ByRef CodeFolder, ByRef AuthVerifiCode, ByRef AuthIdentifier)
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     CountF = fso.GetFolder(CodeFolder).Files.Count
-    'Šù‘¶ƒeƒLƒXƒgƒtƒ@ƒCƒ‹íœ
+    'æ—¢å­˜ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
     If CountF > 0 Then
         Kill CodeFolder & "*.txt"
         CountF = 0
     End If
     
-    'OUTLOOK‘€ì
+    'OUTLOOKæ“ä½œ
     Dim olApp As Outlook.Application
     Dim olNs As Outlook.Namespace
     Dim olInbox As Outlook.MAPIFolder
@@ -84,7 +84,7 @@ Sub SPO_AuthCode(ByRef CodeFolder, ByRef AuthVerifiCode, ByRef AuthIdentifier)
     Set olApp = GetObject(, "Outlook.Application")
     On Error GoTo 0
     
-    'OUTLOOK‚ª—§‚¿ã‚ª‚Á‚Ä‚È‚©‚Á‚½‚ç—§‚¿ã‚°‚é
+    'OUTLOOKãŒç«‹ã¡ä¸ŠãŒã£ã¦ãªã‹ã£ãŸã‚‰ç«‹ã¡ä¸Šã’ã‚‹
     If olApp Is Nothing Then
         Set olApp = New Outlook.Application
         Set olNs = olApp.GetNamespace("MAPI")
@@ -94,31 +94,31 @@ Sub SPO_AuthCode(ByRef CodeFolder, ByRef AuthVerifiCode, ByRef AuthIdentifier)
     
     Call olApp.Session.LogOn("Outlook", "")
 
-    'ƒ[ƒ‹‘—óM‚µ‚ÄƒtƒHƒ‹ƒ_‚É•Û‘¶‚³‚ê‚é‚Ü‚Åƒ‹[ƒv
+    'ãƒ¡ãƒ¼ãƒ«é€å—ä¿¡ã—ã¦ãƒ•ã‚©ãƒ«ãƒ€ã«ä¿å­˜ã•ã‚Œã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
     startTime = Timer
     Do
-        Call olApp.Session.SendAndReceive(True) '‘S‚Ä‘—óM
+        Call olApp.Session.SendAndReceive(True) 'å…¨ã¦é€å—ä¿¡
         Application.Wait Now() + TimeValue("00:00:05")
         CountF = fso.GetFolder(CodeFolder).Files.Count
         endTime = Timer
         TimeDifference = endTime - startTime
         Debug.Print TimeDifference
         
-        '300•b‚½‚Á‚½‚ç”²‚¯‚ÄÄ“xƒR[ƒh”­s
+        '300ç§’ãŸã£ãŸã‚‰æŠœã‘ã¦å†åº¦ã‚³ãƒ¼ãƒ‰ç™ºè¡Œ
         If TimeDifference > 300 Then
             Exit Sub
         End If
     Loop Until CountF > 0
     
     
-    '•Û‘¶‚³‚ê‚½txtƒtƒ@ƒCƒ‹‚©‚çcode‚ğ’Šo
+    'ä¿å­˜ã•ã‚ŒãŸtxtãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰codeã‚’æŠ½å‡º
     buf = Dir(CodeFolder & "*.txt")
     Do While buf <> ""
-        If InStr(buf, "ŒŸØƒR[ƒh") > 0 Then
+        If InStr(buf, "æ¤œè¨¼ã‚³ãƒ¼ãƒ‰") > 0 Then
         AuthVerifiCode = Left(buf, 8)
         End If
         
-        If InStr(buf, "¯•Ê") > 0 Then
+        If InStr(buf, "è­˜åˆ¥") > 0 Then
         AuthIdentifier = Left(buf, 7)
         End If
         
