@@ -1,0 +1,2 @@
+# SPO_Auth
+Microsoft SharePointのワンタイムコードでログインするマクロ
